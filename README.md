@@ -1,2 +1,5 @@
-# dajet-mcp-server
-DaJet MCP Server
+# DaJet MCP Server
+
+Демонстрационный проект создания MCP-сервера с использованием DaJet Metadata.
+
+Данный сервер можно подключить, например, в IDE Cursor.
