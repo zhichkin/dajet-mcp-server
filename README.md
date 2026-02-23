@@ -1,6 +1,6 @@
 # DaJet MCP Server
 
-Демонстрационный проект создания MCP-сервера с использованием DaJet Metadata.
+Демонстрационный проект создания MCP-сервера с использованием [DaJet Metadata](https://github.com/zhichkin/dajet-metadata).
 
 Данный сервер можно подключить, например, в IDE Cursor.
 
