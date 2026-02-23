@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>DaJet.Mcp.Server</RootNamespace>
+    <UserSecretsId>8dcd388d-2dc8-449e-beb5-a6f19f85bafe</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <AssemblyName>DaJet.Mcp.Server</AssemblyName>
+    <AssemblyTitle>DaJet MCP Server</AssemblyTitle>
+    <Title>DaJet MCP Server</Title>
+    <Version>1.0.0</Version>
+    <Authors>Zhichkin</Authors>
+    <Description>DaJet MCP-сервер для 1С:Предприятие 8</Description>
+    <Copyright>Zhichkin © 2026</Copyright>
+    <PackageProjectUrl>https://zhichkin.github.io/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/zhichkin/dajet-mcp-server</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DaJet.Metadata" Version="5.0.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+    <PackageReference Include="ModelContextProtocol.AspNetCore" Version="0.9.0-preview.2" />
+  </ItemGroup>
+
+</Project>
