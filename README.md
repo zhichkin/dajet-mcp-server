@@ -7,3 +7,5 @@
 Адрес и порт MCP-сервера для работы по протоколу HTTP указываются в файле appsetting.json.
 
 Настройки подключения к базе данных 1С:Предприятие 8 указываются там же.
+
+Примеры использования DaJet Metadata можно найти в проекте [DaJet HTTP Server](https://github.com/zhichkin/dajet-http-server).
