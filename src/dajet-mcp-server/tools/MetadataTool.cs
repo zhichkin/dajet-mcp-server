@@ -132,7 +132,11 @@ namespace DaJet.Mcp.Server.Tools
 
             foreach (EntityDefinition table in entity.Entities)
             {
-                MdObject target = new();
+                MdObject target = new()
+                {
+                    Name = table.Name,
+                    DbName = table.DbName
+                };
 
                 CopyProperties(table.Properties, in target);
 
