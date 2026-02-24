@@ -11,6 +11,9 @@ namespace DaJet.Mcp.Server
 
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+            builder.Host.UseSystemd();
+            builder.Host.UseWindowsService();
+
             builder.Services
                 .AddMcpServer()
                 .WithHttpTransport()
@@ -24,28 +27,44 @@ namespace DaJet.Mcp.Server
         }
         private static void InitializeMetadataCache()
         {
-            AppSettings settings = new();
+            ServerSettings settings = new();
 
             IConfigurationRoot config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: false)
+                .AddJsonFile("datasources.json", optional: false)
                 .Build();
 
             config.Bind(settings);
 
-            if (!Enum.TryParse(settings.DataSource, out DataSourceType dataSource))
+            foreach (DataSourceSettings dataSource in settings.DataSources)
             {
-                throw new InvalidOperationException("Неверно указаны настройки источника данных");
-            }
+                if (string.IsNullOrWhiteSpace(dataSource.Name))
+                {
+                    FileLogger.Default.Write($"Не указано имя источника данных.");
+                    continue;
+                }
 
-            try
-            {
-                MetadataCache.Add("MySource", dataSource, settings.ConnectionString);
-            }
-            catch (Exception exception)
-            {
-                string message = $"Ошибка регистрации источника данных 'MySource': {exception.Message}";
+                if (string.IsNullOrWhiteSpace(dataSource.Type))
+                {
+                    FileLogger.Default.Write($"Не указан тип источника данных для '{dataSource.Name}'.");
+                    continue;
+                }
 
-                throw new InvalidOperationException(message);
+                if (!Enum.TryParse(dataSource.Type, out DataSourceType sourceType))
+                {
+                    FileLogger.Default.Write($"Указан неподдерживаемый тип источника данных '{dataSource.Type}' для '{dataSource.Name}'. Возможные значения: SqlServer или PostgreSql.");
+                    continue;
+                }
+
+                try
+                {
+                    MetadataCache.Add(dataSource.Name, sourceType, dataSource.ConnectionString);
+                }
+                catch (Exception exception)
+                {
+                    string message = $"Ошибка регистрации источника данных '{dataSource.Name}': {exception.Message}";
+                    FileLogger.Default.Write(message);
+                    continue;
+                }
             }
         }
     }

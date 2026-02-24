@@ -1,0 +1,9 @@
+{
+  "DataSources": [
+    {
+      "Name": "MS_TEST",
+      "Type": "SqlServer",
+      "ConnectionString": "Data Source=MyServer;Initial Catalog=MyDatabase;Integrated Security=True;Encrypt=False;"
+    }
+  ]
+}
